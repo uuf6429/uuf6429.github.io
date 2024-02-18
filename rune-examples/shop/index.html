@@ -94,7 +94,10 @@
             }
 
             const binaryData = await get('./php-web.wasm', function (e) {
-                loader.textContent = 'Preloading PHP (' + (e.loaded / e.total * 100).toFixed(1) + '%)...';
+                const total = e.total || 6855933;
+                const percent = e.loaded / total * 100;
+                const progress = Number.isFinite(percent) ? ' (' + percent.toFixed(1) + '%)' : '';
+                loader.textContent = 'Preloading PHP' + progress + '...';
             });
 
             loader.textContent = 'Loading PHP VM...';
